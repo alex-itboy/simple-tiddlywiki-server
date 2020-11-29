@@ -3,20 +3,7 @@ import datetime
 
 from flask import Flask, request
 
-# SERVER OPTIONS
-
-LISTEN_ADDR = '0.0.0.0'
-LISTEN_PORT = 12345
-DEBUG_MODE = True
-WIKI_FOLDER = '.'
-WIKI_FILENAME = 'index.html'
-BACKUP_FOLDER = 'backups'
-USERNAME = 'alex'
-PASSWORD = '123456'
-USE_REQUEST_DIR = True
-DO_BACKUP = True
-
-# SERVER OPTIONS
+from config import *
 
 app_option = {
     'static_folder': WIKI_FOLDER,
