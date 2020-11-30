@@ -1,5 +1,6 @@
 import os
 import datetime
+import pprint
 
 from flask import Flask, request
 
@@ -87,6 +88,24 @@ def save_wiki():
 
         if os.path.exists(current_filepath):
             os.rename(current_filepath, backup_filepath)
+        pass
+
+    backup_files = [os.path.join(backup_folder, f) for f in os.listdir(backup_folder) if
+                    os.path.isfile(os.path.join(backup_folder, f))]
+    delete_number = len(backup_files) - BACKUP_FILE_LIMIT
+    if delete_number > 0:
+        backup_files_by_date = []
+        for file in backup_files:
+            backup_files_by_date.append((os.path.getmtime(file), file))
+        backup_files_by_date.sort(key=lambda x: x[0])
+
+        # sort by time stamp ascending, delete files in the first
+        files_to_delete = [_[1] for _ in backup_files_by_date[:delete_number]]
+        for _ in files_to_delete:
+            try:
+                os.remove(_)
+            except:
+                pass
         pass
 
     # handle upload

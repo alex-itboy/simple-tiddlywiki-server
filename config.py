@@ -8,3 +8,4 @@ USERNAME = 'username'
 PASSWORD = 'password'
 USE_REQUEST_DIR = True
 DO_BACKUP = True
+BACKUP_FILE_LIMIT = 10
