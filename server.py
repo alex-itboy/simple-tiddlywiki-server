@@ -21,6 +21,12 @@ app = Flask(__name__, **app_option)
 
 @app.route('/', methods=['GET'])
 def show_wiki():
+    if AUTH_ENABLE:
+        auth = request.authorization
+        if not auth or auth.username != USERNAME or auth.password != PASSWORD:
+            return ('Unauthorized', 401, {
+                'WWW-Authenticate': 'Basic realm="Login Required"'
+            })
     return app.send_static_file(WIKI_FILENAME)
     pass
 
