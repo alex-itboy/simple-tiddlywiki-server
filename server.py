@@ -18,6 +18,9 @@ app_run_option = {
 
 app = Flask(__name__, **app_option)
 
+@app.route('/favicon.ico')
+def favicon():
+    return app.send_static_file(FAVICON_FILE)
 
 @app.route('/', methods=['GET'])
 def show_wiki():
